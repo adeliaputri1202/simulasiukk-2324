@@ -2,39 +2,39 @@
  * menu page
  */
 var menu = [
-	{
-		id: 0,
-		name: "Paket 1",
-		desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
-		price: 36000,
-		count: 0,
-	},
-	{
-		id: 1,
-		name: "Paket 2",
-		desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
-		price: 36000,
-		count: 0,
-	},
-	{
-		id: 2,
-		name: "Paket 3",
-		desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
-		price: 36000,
-		count: 0,
-	},
+  {
+    id: 0,
+    name: "Paket 1",
+    desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
+    price: 36000,
+    count: 0,
+  },
+  {
+    id: 1,
+    name: "Paket 2",
+    desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
+    price: 36000,
+    count: 0,
+  },
+  {
+    id: 2,
+    name: "Paket 3",
+    desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
+    price: 36000,
+    count: 0,
+  },
 ];
 
 // add menu card
 const menuSection = document.querySelector(".menu-section");
 let card = ``;
 menu.map((data) => {
-	card += innerCardMenu(data.name, data.desc, data.price, data.count, data.id);
-	menuSection.innerHTML = card;
+  card += innerCardMenu(data.name, data.desc, data.price, data.count, data.id);
+  menuSection.innerHTML = card;
 });
 
 function innerCardMenu(name, desc, price, count, id) {
-	return `<!-- card -->
+  return `<!-- card -->
 	<div class="card">
 		<button class="kategori" aria-readonly="true">Paket</button>
 		<hr class="line" />
@@ -61,38 +61,52 @@ function innerCardMenu(name, desc, price, count, id) {
 }
 
 // add count
-let count = 0;
 let order = [];
+
 menu.map((data) => {
-	document
-		.getElementById(`addCount${data.id}`)
-		.addEventListener("click", function (event) {
-			event.preventDefault();
-			document.getElementById(`count${data.id}`).innerHTML = `${(count += 1)}`;
-			if (order[data.id] == null) {
-				order.push({
-					id: 0,
-					name: "Paket 1",
-					desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
-					price: 36000,
-					count: count,
-				});
-				console.log(order);
-			} else {
-				order[data.id].count = count;
-			}
-			let totalPay = 0;
-			const total = order[data.id].price * order[data.id].count;
+  data.count = 0; // Inisialisasi jumlah untuk setiap item menjadi 0
 
-			console.log(order);
-		});
+  const addButton = document.getElementById(`addCount${data.id}`);
+  const countElement = document.getElementById(`count${data.id}`);
+
+  addButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    data.count++; // Tambahkan jumlah hanya untuk item saat ini
+    countElement.innerHTML = data.count;
+
+    const subtotal = data.price * data.count; // Hitung subtotal hanya untuk item saat ini
+    console.log(`Subtotal for ${data.name}: ${subtotal}`);
+
+    if (order[data.id] == null) {
+      order[data.id] = {
+        id: data.id,
+        name: data.name,
+        desc: data.desc,
+        price: data.price,
+        count: data.count,
+      };
+    } else {
+      order[data.id].count = data.count;
+    }
+
+    // Hitung total harga
+    let totalPrice = 0;
+    order.map((item) => {
+      totalPrice += item.price * item.count;
+    });
+
+    console.log(`Total Price: ${totalPrice}`);
+    localStorage.setItem("total", totalPrice);
+  });
 });
-
-// order
-document.getElementById("order").addEventListener("click", function (event) {
-	event.preventDefault();
-	location.href = "order.html";
-	// console.log("yes");
-});
-
-
+const pesan = () => {
+  order.map((item) => {
+    if (item.count != null) {
+      console.log(item.count);
+      window.location.href = "order.html";
+    } else {
+      alert();
+      console.log("data tidak boleh kosong");
+    }
+  });
+};
