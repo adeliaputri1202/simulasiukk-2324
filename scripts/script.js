@@ -8,7 +8,7 @@ const formatUang = (rupiah) => {
   return rupiah.toLocaleString("id-ID", {
     style: "currency",
     currency: "IDR",
-    minimumFractionDigits: 0,
+
   });
 };
 let data = localStorage.getItem("total");
