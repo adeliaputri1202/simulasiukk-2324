@@ -1,6 +1,4 @@
-/**
- * menu page
- */
+// menu page
 var menu = [
   {
     id: 0,
@@ -11,16 +9,16 @@ var menu = [
   },
   {
     id: 1,
-    name: "Paket 2",
-    desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
-    price: 36000,
+    name: "Nasi goreng",
+    desc: "Nasi yang di goreng dengan bumbu dan topping spesial",
+    price: 15000,
     count: 0,
   },
   {
     id: 2,
-    name: "Paket 3",
-    desc: "Nasi Timbel + Ayam (bakar/goreng) + Tahu & Tempe + Sambal + Teh",
-    price: 36000,
+    name: "Lemon Tea",
+    desc: "Teh dengan perasan jeruk lemon yang segar",
+    price: 8000,
     count: 0,
   },
 ];
@@ -41,7 +39,7 @@ function innerCardMenu(name, desc, price, count, id) {
 		<div class="container-content">
 			<div>
 				<img
-					src="./images/example-product/indomie.jpg"
+					src="./assets/img/indomie.jpg"
 					alt=""
 					class="produk-img"
 				/>

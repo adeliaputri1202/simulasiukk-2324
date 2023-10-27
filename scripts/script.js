@@ -15,7 +15,8 @@ let data = localStorage.getItem("total");
 let total = (document.getElementById("total").innerHTML = formatUang(
   parseInt(data)
 ));
-let saldo_u = 50000;
+
+let saldo_u = 5000;
 const saldo_user = (document.getElementById("saldo").innerHTML =
   formatUang(saldo_u));
 const bayar = () => {
